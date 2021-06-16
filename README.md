@@ -1,5 +1,4 @@
 ### Instructions for backend
-
 // instructions for me incase i forget this shit
 
 Using pipenv to create python virtual environment
