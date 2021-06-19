@@ -1,20 +1,25 @@
 ### Instructions for backend
 // instructions for me incase i forget this shit
 
-Using pipenv to create python virtual environment
 
-#pipenv
-*pipenv shell* : to start shell
-pipenv install <pacakages> : for actual packages
-pipenv graph : list packages 
-**python version for project** : python 3.8.5
+**python version for project** : python 3.8.3
 
 
-# run 
-pipenv shell 
-python run.py
+# Run commands
 
-Turn off shell : deactivate
+```bash
+ python -m venv env
+ 
+ source env/bin/activate
+ 
+ pip install -r requirements.txt
+ 
+ //To run app 
+ 
+ python run.py
+ 
+```
+//to turn of the virtualenv "deactivate"
 
 
 
@@ -60,22 +65,21 @@ username
 **json example format**
 
 {
+
 "email": "the.daveads@gmail.com",
+
 "first_name" : "David",
+
 "last_name" : "Adejumo",
+
 "password" : "12345",
+
 "username" : "daveads"
+
 }
 
 then the username, email and token would be sent to you (for user access)
 -----------------------------------------------
 
 
-
-
-
-
-
-
-
-
+// would have to create a proper doc for this as time goes
