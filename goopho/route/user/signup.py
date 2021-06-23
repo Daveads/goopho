@@ -12,7 +12,7 @@ def create_user():
     data = request.get_json()
     hashed_password = generate_password_hash(data['password'], method='sha256')
  
-    new_user=User(public_id=str(uuid.uuid4()), email=data['email'], first_name=data['first_name'], last_name=data['last_name'], password=hashed_password, username=data['username'], admin=False)
+    new_user=User(public_id=str(uuid.uuid4()), name=data['username'], email=data['email'], password=hashed_password, admin=False)
     
     db.session.add(new_user)
     db.session.commit()

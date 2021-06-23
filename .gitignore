@@ -61,3 +61,8 @@ env
 
 #nvim 
 *.Swp
+
+later.txt
+
+#still in development
+migrations
