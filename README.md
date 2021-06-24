@@ -66,19 +66,15 @@ username
 
 {
 
+"name" : "daveads"
+
 "email": "the.daveads@gmail.com",
-
-"first_name" : "David",
-
-"last_name" : "Adejumo",
 
 "password" : "12345",
 
-"username" : "daveads"
-
 }
 
-then the username, email and token would be sent to you (for user access)
+then the name, email and token would be sent to you (for user access)
 -----------------------------------------------
 
 
