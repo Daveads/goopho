@@ -12,19 +12,19 @@ def create_user():
     data = request.get_json()
     hashed_password = generate_password_hash(data['password'], method='sha256')
  
-    new_user=User(public_id=str(uuid.uuid4()), name=data['username'], email=data['email'], password=hashed_password, admin=False)
+    new_user=User(public_id=str(uuid.uuid4()), name=data['name'], email=data['email'], password=hashed_password, admin=False)
     
     db.session.add(new_user)
     db.session.commit()
     
-    user = User.query.filter_by(username=data['username']).first()
+    user = User.query.filter_by(name=data['name']).first()
 
     token = jwt.encode({'public_id' : user.public_id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'], algorithm="HS256")
     
     
     return jsonify({
                     'email'  : user.email,
-                    'username' : user.username,
+                    'name' : user.name,
                     'token' : token
                     })
     
