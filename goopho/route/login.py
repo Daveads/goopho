@@ -4,46 +4,34 @@ from goopho.route import User
 from werkzeug.security import check_password_hash
 import jwt
 import datetime
-from functools import wraps
-
-def token_required(f):
-    @wraps(f)
-    def decorated(*args, **kwargs):
-        token = None
-        
-        if 'x-access-token' in request.headers:
-            token = request.headers['x-access-token']
-            
-        if not token:
-            return jsonify({'message' : 'Token is missing'})
-
-
-        try:
-            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms="HS256")
-            current_user = User.query.filter_by(public_id=data['public_id']).first()
-        
-        except:
-            return jsonify({'message': 'Token is invalid!'}), 401
-        
-        return f(current_user, *args, **kwargs)
-
-    return decorated
-
 
 
 @app.route('/login')
 def login():
+
     auth = request.authorization
     
     if not auth or not auth.username or not auth.password:
     
        return make_response("could not authenticat", 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
        
-    user = User.query.filter_by(name=auth.username).first()
-       
+    user = User.query.filter_by(username=auth.username).first()
+    
+    #just testing out something
+    user_data={}
+    
+    user_data['public_id']= user.public_id
+    
+    user_data['role']= user.roles
+    
+    user_data['email_verif']= user.email_verfication
+    
+    user_data['acct_creation'] = user.acct_create_at
+    
+    print(user_data)
        
     if not user:
-        return make_response("could not authenticat", 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
+        return make_response("could not authenticate", 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
         
         
         
@@ -57,7 +45,6 @@ def login():
 
 
     
-    return  make_response("could not authenticat", 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
+    return  make_response("could not authenticate", 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
 
 
-    
