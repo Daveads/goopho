@@ -1,12 +1,15 @@
-from flask import request, jsonify, make_response
-from goopho.route import app
+from flask import request, jsonify, make_response, Blueprint
 from goopho.route import User
 from werkzeug.security import check_password_hash
-import jwt
-import datetime
+
+#add flask_jwt
+from flask_jwt_extended import create_access_token, set_access_cookies
 
 
-@app.route('/login')
+logIn = Blueprint('login', __name__)
+
+
+@logIn.route('/login')
 def login():
 
     auth = request.authorization
@@ -36,15 +39,27 @@ def login():
         
         
     if check_password_hash(user.password, auth.password):
+        
+        access_token = create_access_token(identity=user.public_id)
 
-        token = jwt.encode({'public_id' : user.public_id, 'exp' : datetime.datetime.utcnow() + datetime.timedelta(minutes=30)}, app.config['SECRET_KEY'], algorithm="HS256")
-
-        cod = token
-
-        return jsonify({'token' : cod })
+        response = jsonify({"messge": "login successful",
+                            'token' : access_token,
+                            'user' : user.username
+        })
+	    
+        set_access_cookies(response, access_token)
+	
+	  
+        """return jsonify({'token' : access_token,
+        		'message': "login successful"
+         })"""
+     
+	    
+        return response
 
 
     
     return  make_response("could not authenticate", 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
+
 
 
