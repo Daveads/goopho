@@ -2,9 +2,9 @@ from flask import Blueprint, jsonify
 from flask_jwt_extended import unset_jwt_cookies
 
 
-logO = Blueprint('logout', __name__)
+logOut = Blueprint('logout', __name__)
 
-@logO.route('/logout', methods=['POST'])
+@logOut.route('/logout', methods=['POST'])
 def logout():
     response = jsonify({"msg": "logout successful"})
     unset_jwt_cookies(response)
@@ -12,13 +12,13 @@ def logout():
 
 
 
-@logO.route('/me', methods=['GET'])
+@logOut.route('/me', methods=['GET'])
 def me():
     
     return '<h1>That me</h2>'
     
     
-@logO.route('/fuck', methods=['GET'])
+@logOut.route('/fuck', methods=['GET'])
 def fuck():
     
     return 'Do you want to fuck'
