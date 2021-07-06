@@ -31,19 +31,22 @@ migrate = Migrate(app, db)
 ##
 ## ROUTES
 ##
+
 from goopho.route.auth.logout import logO
 from goopho.route.auth.signup import signup
 from goopho.route.auth.login import logIn
-from goopho.route.admin.Admin import Admin
-from goopho.route.user.checkstuff import checkdata
 
+from goopho.route.admin.Admin import Admin
+
+from goopho.route.user.checkstuff import checkdata
+from goopho.route.user.upload import upload
 
 app.register_blueprint(Admin)
 app.register_blueprint(logO)
 app.register_blueprint(checkdata)
 app.register_blueprint(logIn)
 app.register_blueprint(signup)
-
+app.register_blueprint(upload)
 
 
 
