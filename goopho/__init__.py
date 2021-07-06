@@ -32,7 +32,7 @@ migrate = Migrate(app, db)
 ## ROUTES
 ##
 
-from goopho.route.auth.logout import logO
+from goopho.route.auth.logout import logOut
 from goopho.route.auth.signup import signup
 from goopho.route.auth.login import logIn
 
@@ -42,7 +42,7 @@ from goopho.route.user.checkstuff import checkdata
 from goopho.route.user.upload import upload
 
 app.register_blueprint(Admin)
-app.register_blueprint(logO)
+app.register_blueprint(logOut)
 app.register_blueprint(checkdata)
 app.register_blueprint(logIn)
 app.register_blueprint(signup)
@@ -68,3 +68,9 @@ def refresh_expiring_jwts(response):
 @app.errorhandler(404)
 def not_found(error):
 	return jsonify({'message': 'Resource not found'}), 404
+	
+	
+@app.errorhandler(500)
+def internal_error(error):
+    
+    return jsonify({'message': 'we will get back to you soon'}), 500
