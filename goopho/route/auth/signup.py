@@ -5,7 +5,7 @@ from goopho.route import User
 from goopho.route import db
 
 #add flask_jwt
-from flask_jwt_extended import create_access_token, set_access_cookies
+from flask_jwt_extended import create_access_token, set_access_cookies, get_csrf_token
 
 signup = Blueprint('signup', __name__)
 
@@ -25,11 +25,14 @@ def create_user():
 
     access_token = create_access_token(identity=user.public_id)
     
+    csrf_token = get_csrf_token(access_token)
+    
     
     response = jsonify({"messge": "User created",
                             'email' : user.email,
                             'name' :  user.name,
-                            'token' : access_token    
+                            'token' : access_token,
+                            'csrf_token' : csrf_token  
         })
     
     
