@@ -61,7 +61,7 @@ def uploadFiles():
 
     
     """
-    product = Product(small_description=data['description'], long_description=['long description'], user_pub_id=get_jwt_identity())
+    product = Product(title=data['title'], description=['description'], user_pub_id=get_jwt_identity())
     db.session.add(product)
     db.session.commit()
     
