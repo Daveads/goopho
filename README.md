@@ -28,13 +28,6 @@
 
 # REQUEST ACCESS
 
-
------------------------------------
-header : x-access-token
-token : token given to you
-
-
-
 ## LOGIN
 login in requires "basic auth"
 basic auth : username
@@ -66,9 +59,11 @@ username
 
 {
 
-"name" : "daveads"
+"name" : "Adejumo David Adewale"
 
-"email": "the.daveads@gmail.com",
+"username" : "daveads"
+
+"email": "daveads@gmail.com",
 
 "password" : "12345",
 
@@ -78,9 +73,11 @@ then the name, email and token would be sent to you (for user access)
 -----------------------------------------------
 
 
+headers requirements
 
-access_token_cookie
-X-CSRF-TOKEN
+access_token_cookie(jwt): This would be sent to you but will be save to the cookies
+
+X-CSRF-TOKEN: needed when a **[POST PUT PATCH DELETE]** is method is sent
 
 
 // would have to create a proper doc for this as time goes
