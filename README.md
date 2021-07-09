@@ -78,4 +78,9 @@ then the name, email and token would be sent to you (for user access)
 -----------------------------------------------
 
 
+
+access_token_cookie
+X-CSRF-TOKEN
+
+
 // would have to create a proper doc for this as time goes
