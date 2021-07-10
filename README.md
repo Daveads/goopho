@@ -75,7 +75,7 @@ then the name, email and token would be sent to you (for user access)
 
 headers requirements
 
-access_token_cookie(jwt): This would be sent to you but will be save to the cookies
+access_token (jwt): This would be sent to you but will be save to the cookies
 
 X-CSRF-TOKEN: needed when a **[POST PUT PATCH DELETE]** is method is sent
 
