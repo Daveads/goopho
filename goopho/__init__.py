@@ -49,6 +49,12 @@ app.register_blueprint(signup)
 app.register_blueprint(upload)
 
 
+#######################################################
+# Todo 
+# work on super root user.... 
+# auto add a super user if it does'nt exist
+#######################################################
+
 
 @app.after_request
 def refresh_expiring_jwts(response):
