@@ -30,7 +30,9 @@ def uploadFiles():
 
     
     files = request.files.getlist('file')
+    data = request.values.copy()
     
+
     picname = []
 
     for file in files:
@@ -57,29 +59,24 @@ def uploadFiles():
             return jsonify({'message' : 'file type not allowed'})
 
 
-    data = request.get_json()
 
     
-    """
-    product = Product(title=data['title'], description=['description'], user_pub_id=get_jwt_identity())
+    
+    product = Product(title=data['title'], description=data['description'], user_pub_id=get_jwt_identity())
     db.session.add(product)
     db.session.commit()
     
     
-    product = Product.query.filter_by(name=data['name']).first()
+    
+    product = Product.query.filter_by(title=data['title']).first()
     product_id = product.id
     
     for i in picname:
-    
+        print(i)   
         image = Image(image_name=i, product_id=product_id)
-        
-        db.session.add(images)
-        
-    	db.session.commit()
-    """
+        db.session.add(image)
+
+    db.session.commit()
     
-    print(picname)
-    for i in picname:
-        print(i)
-        
-    return jsonify({'message' : 'File(s) successfully uploaded'})    
+     
+    return jsonify({'message' : 'File(s) successfully uploaded'})
