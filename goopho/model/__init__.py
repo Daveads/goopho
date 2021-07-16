@@ -1,2 +1,0 @@
-from goopho import db
-

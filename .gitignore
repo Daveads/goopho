@@ -55,6 +55,7 @@ venv.bak/
 #EXPERIEMNTS
 experiments
 goopho/user_uploads
+goopho/uploads/
 
 #NotNeeded Files
 config.py

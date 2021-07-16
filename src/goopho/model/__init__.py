@@ -1,0 +1,2 @@
+from goopho import db
+
