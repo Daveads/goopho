@@ -40,6 +40,7 @@ from goopho.route.admin.Admin import Admin
 
 from goopho.route.user.checkstuff import checkdata
 from goopho.route.user.upload import upload
+from goopho.route.user.getupload import getUpload
 
 app.register_blueprint(Admin)
 app.register_blueprint(logOut)
@@ -47,7 +48,7 @@ app.register_blueprint(checkdata)
 app.register_blueprint(logIn)
 app.register_blueprint(signup)
 app.register_blueprint(upload)
-
+app.register_blueprint(getUpload)
 
 #######################################################
 # Todo 
