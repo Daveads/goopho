@@ -25,7 +25,23 @@ class create_user(Resource):
     def post(self):
 
         data = signup_args.parse_args()
+        ## email and username should be unique
+        
+        user_name = User.query.filter_by(username=data['username']).first()
+        
+        email = User.query.filter_by(email=data['email']).first()
+        
+        print(email)
 
+        if user_name:
+            abort(409, message="user name already exist...")
+	    
+        if email and email.isDeleted == False :
+            # this is still a test
+            # if email already in database it either the user forgot he/her password or an intruder is trying to get in to the acc 
+            # so a email should be send to the "user"
+            abort(409, message="email already exist...")
+	    
         hashed_password = generate_password_hash(data['password'], method='sha256')
  
         new_user=User(public_id=str(uuid.uuid4()), name=data['name'], username=data['username'], email=data['email'], password=hashed_password, isDeleted=False)
