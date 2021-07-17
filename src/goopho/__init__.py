@@ -36,7 +36,7 @@ api = Api(app)
 ##
 
 from goopho.route.auth.logout import logOut
-from goopho.route.auth.signup import signup
+
 from goopho.route.auth.login import logIn
 
 from goopho.route.admin.Admin import Admin
@@ -50,14 +50,18 @@ app.register_blueprint(Admin)
 app.register_blueprint(logOut)
 app.register_blueprint(checkdata)
 app.register_blueprint(logIn)
-app.register_blueprint(signup)
 app.register_blueprint(upload)
 app.register_blueprint(getUpload)
 
 
 
+from goopho.route.auth.signup import create_user
 
-# route resources 
+###
+# route resources
+###
+api.add_resource(create_user, "/signup")
+ 
 
 #######################################################
 # Todo 

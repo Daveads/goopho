@@ -1,4 +1,5 @@
 from goopho import app
+from goopho import api
 
 # db instant
 from goopho import db
