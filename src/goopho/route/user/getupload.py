@@ -46,3 +46,14 @@ def uploadFiles():
     
     return  send_from_directory(directory="uploads/", path=name, mimetype='image/png', as_attachment=True)
 
+
+
+"""
+will revisit this
+
+This is meant to just send the picture name of the product to the client webapp with the path already known to the client app 
+
+but in case of a mobile app 
+
+might consider amazon {s3 or encoding the pictures in **base64** or something}
+"""
