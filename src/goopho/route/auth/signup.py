@@ -1,5 +1,6 @@
 from flask import jsonify, make_response
 from flask_restful import Resource, reqparse, abort
+from flasgger import swag_from
 
 import uuid
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -20,7 +21,7 @@ signup_args.add_argument("email", type=str, help="email fields is required", req
 
 class create_user(Resource):
 
-    
+    @swag_from('/goopho/docs/signup_specs.yml', methods=['POST'])
     def post(self):
 
         data = signup_args.parse_args()
