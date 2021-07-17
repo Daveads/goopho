@@ -1,5 +1,6 @@
 from goopho import app
 from goopho import api
+from goopho import swag
 
 # db instant
 from goopho import db

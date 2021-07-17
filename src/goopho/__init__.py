@@ -1,7 +1,10 @@
 from flask import Flask, jsonify
 from flask_restful import Api
+from flasgger import Swagger, swag_from
+
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+
 from flask_cors import CORS
 
 
@@ -30,6 +33,14 @@ jwt = JWTManager(app)
 migrate = Migrate(app, db)
 
 api = Api(app)
+
+
+app.config['SWAGGER'] = {
+    'title': 'Goopho route api doc',
+    'uiversion': 2
+}
+
+swag = Swagger(app)
 
 ##
 ## ROUTES 
