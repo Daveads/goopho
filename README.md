@@ -81,3 +81,12 @@ X-CSRF-TOKEN: needed when a **[POST PUT PATCH DELETE]** is method is sent
 
 
 // would have to create a proper doc for this as time goes
+
+## Doc Access
+http://localhost:5000/apidocs/
+
+
+// still moving things to doc and get  use to flasgger/swagger doc generator
+
+Using [flagger](https://github.com/flasgger/flasgger) which create easy access to Easy OpenAPI specs and [Swagger UI](https://github.com/swagger-api/swagger-ui) for your Flask API for docs 
+
