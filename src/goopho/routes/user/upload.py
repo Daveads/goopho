@@ -6,10 +6,10 @@ from flask_jwt_extended import get_jwt_identity
 from werkzeug.utils import secure_filename
 import os
 
-from goopho.route import app
-from goopho.route import db
-from goopho.route import Product
-from goopho.route import Image
+from goopho.routes import app
+from goopho.routes import db
+from goopho.routes import Product
+from goopho.routes import Image
 
 upload = Blueprint('upload', __name__)
 

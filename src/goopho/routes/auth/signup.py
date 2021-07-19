@@ -1,13 +1,12 @@
 from re import I
-from flask import jsonify, make_response
+from flask import jsonify
 from flask_restful import Resource, reqparse, abort
 from flasgger import swag_from
 
 import uuid
-from werkzeug.security import generate_password_hash, check_password_hash
 
-from goopho.route import User
-from goopho.route import db
+from goopho.routes import User
+from goopho.routes import db
 
 
 #add flask_jwt
@@ -49,9 +48,8 @@ class create_user(Resource):
             # so a email should be send to the "user"
             abort(409, message="email already exist...")
 	    
-        hashed_password = generate_password_hash(data['password'], method='sha256')
  
-        new_user=User(public_id=str(uuid.uuid4()), name=data['name'], username=data['username'], email=data['email'], password=hashed_password, isDeleted=False)
+        new_user=User(name=data['name'], username=data['username'], email=data['email'], password=data['password'])
     
         db.session.add(new_user)
 
@@ -64,12 +62,16 @@ class create_user(Resource):
         csrf_token = get_csrf_token(access_token)
     
     
-        response = jsonify({"messge": "User created",
+        response = jsonify({
+
+                            "messge": "User created",
                             'email' : user.email,
                             'name' :  user.name,
                             'username' : user.username,
+                            'email_confirmation' : user.email_verification,
                             'token' : access_token,
                             'csrf_token' : csrf_token  
+
         })
     
     

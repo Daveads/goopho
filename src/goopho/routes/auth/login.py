@@ -6,7 +6,7 @@ from flasgger import swag_from
 
 
 
-from goopho.route import User
+from goopho.routes import User
 from werkzeug.security import check_password_hash
 
 #add flask_jwt
@@ -57,7 +57,8 @@ class login(Resource):
         
             response = jsonify({
                             'token' : access_token,
-                            'csrf_token' : csrf_token
+                            'csrf_token' : csrf_token,
+                            'email_verfication' : user.email_verfication
                             })
 	    
             set_access_cookies(response, access_token)

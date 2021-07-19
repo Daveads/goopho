@@ -1,6 +1,5 @@
-from goopho.model import db
-from sqlalchemy.sql import func
-
+from goopho.models import db
+import datetime
 
 class Oldpassword():
     # id
