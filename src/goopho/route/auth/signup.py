@@ -1,3 +1,4 @@
+from re import I
 from flask import jsonify, make_response
 from flask_restful import Resource, reqparse, abort
 from flasgger import swag_from
@@ -28,10 +29,19 @@ class create_user(Resource):
         ## email and username should be unique
         
         user_name = User.query.filter_by(username=data['username']).first()
-        
+
         email = User.query.filter_by(email=data['email']).first()
+
+        count = 0
         
-        print(email)
+        
+        data_check = data.copy()
+        
+        for i in data_check :
+            if data_check[i] == "" :
+
+                abort(409, message=f"{i} can't be empty")
+
 
         if user_name:
             abort(409, message="user name already exist...")
