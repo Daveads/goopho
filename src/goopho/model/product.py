@@ -11,7 +11,7 @@ class Product(db.Model):
     
     created_on = db.Column(db.DateTime(timezone=True), default=func.now())
 
-    user_pub_id = db.Column(db.Integer, db.ForeignKey('user.public_id'))
+    user_pub_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     
     images = db.relationship('Image')
 
