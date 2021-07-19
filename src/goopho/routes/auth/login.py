@@ -58,7 +58,8 @@ class login(Resource):
             response = jsonify({
                             'token' : access_token,
                             'csrf_token' : csrf_token,
-                            'email_verfication' : user.email_verfication
+                            'email_verfication' : user.email_verfication,
+                            'delete_status' : user.isDeleted
                             })
 	    
             set_access_cookies(response, access_token)
