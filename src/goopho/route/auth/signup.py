@@ -28,10 +28,12 @@ class create_user(Resource):
         ## email and username should be unique
         
         user_name = User.query.filter_by(username=data['username']).first()
-        
+
         email = User.query.filter_by(email=data['email']).first()
         
-        print(email)
+        if data['username'] or data['password'] or data['name'] or data['email'] == "":
+            abort(409, message="fields can't been empty")
+
 
         if user_name:
             abort(409, message="user name already exist...")
