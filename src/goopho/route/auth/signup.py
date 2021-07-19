@@ -7,7 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from goopho.route import User
 from goopho.route import db
-from goopho.route import api
+
 
 #add flask_jwt
 from flask_jwt_extended import create_access_token, set_access_cookies, get_csrf_token
@@ -60,6 +60,7 @@ class create_user(Resource):
         response = jsonify({"messge": "User created",
                             'email' : user.email,
                             'name' :  user.name,
+                            'username' : user.username,
                             'token' : access_token,
                             'csrf_token' : csrf_token  
         })
