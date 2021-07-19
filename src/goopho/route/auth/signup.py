@@ -1,3 +1,4 @@
+from re import I
 from flask import jsonify, make_response
 from flask_restful import Resource, reqparse, abort
 from flasgger import swag_from
@@ -30,9 +31,13 @@ class create_user(Resource):
         user_name = User.query.filter_by(username=data['username']).first()
 
         email = User.query.filter_by(email=data['email']).first()
+
+        data_check = data.copy()
         
-        if data['username'] or data['password'] or data['name'] or data['email'] == "":
-            abort(409, message="fields can't been empty")
+        for i in data_check :
+            if data_check[i] == "" :
+
+                abort(409, message=f"{i} can't be empty")
 
 
         if user_name:
