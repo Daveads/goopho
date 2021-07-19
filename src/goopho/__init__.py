@@ -78,6 +78,11 @@ api.add_resource(login, "/login")
 #######################################################
 
 
+#
+# MODEL INSTANT FOR EXTERNAL USER
+from goopho.models.users import User
+
+
 @app.after_request
 def refresh_expiring_jwts(response):
     try:
