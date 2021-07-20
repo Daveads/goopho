@@ -1,3 +1,68 @@
 #!/usr/bin/env bash
 
-source cli/activate
+
+acti(){
+
+		if [[ "$1" == "-a" || "$1" == "-activate" ]]; then
+
+		source cli/activate
+		echo $1
+		echo "activated..!!!"
+
+		fi
+}
+
+
+deactivate(){
+
+		if [[ "$1" == "-d" || "$1" == "-deactivate" ]]; then
+
+				source cli/deactivate
+				echo $1
+				echo "deactivated...!!!"
+		fi
+}
+
+
+
+Help(){
+printf "
+Usage: initiate [options] ....
+
+Options:
+
+		To activate this script run  [source initiate -h]
+
+		-h       -help     	for help
+		-d       -deactivate   to deactivate
+		-a       -activate   	to activate
+"
+}
+
+
+case $1 in 
+
+   -h|-H|-help|-Help|HELP)
+		Help
+		;;
+
+
+   -d|-deactivate)
+		deactivate $1
+		;;
+
+
+   -a|-activate)
+		acti $1
+		;;
+
+
+   *)
+
+printf "
+helper: invalid option -- '$1'
+  Use: initiate -h 
+		"
+		;;
+
+esac
