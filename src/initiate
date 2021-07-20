@@ -7,7 +7,7 @@ acti(){
 
 		source cli/activate
 
-		#source env/bin/activate
+		source env/bin/activate
 
 		echo "virtual environments activated..!!!"
 		fi
@@ -20,9 +20,10 @@ deactivate(){
 
 				source cli/deactivate
 
+				#deactivate
+
 				echo "deactivated...!!!"
 
-				$SHELL
 		fi
 }
 
