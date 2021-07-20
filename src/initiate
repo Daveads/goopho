@@ -6,9 +6,10 @@ acti(){
 		if [[ "$1" == "-a" || "$1" == "-activate" ]]; then
 
 		source cli/activate
-		echo $1
-		echo "activated..!!!"
 
+		#source env/bin/activate
+
+		echo "virtual environments activated..!!!"
 		fi
 }
 
@@ -18,8 +19,10 @@ deactivate(){
 		if [[ "$1" == "-d" || "$1" == "-deactivate" ]]; then
 
 				source cli/deactivate
-				echo $1
+
 				echo "deactivated...!!!"
+
+				$SHELL
 		fi
 }
 
