@@ -10,6 +10,10 @@ acti(){
 		source env/bin/activate
 
 		echo "virtual environments activated..!!!"
+
+		echo $FLASK_APP
+		echo $FLASK_ENV
+
 		fi
 }
 
@@ -24,6 +28,9 @@ deactivate(){
 
 				echo "deactivated...!!!"
 
+				echo $FLASK_APP
+				echo $FLASK_ENV
+
 		fi
 }
 
@@ -37,9 +44,9 @@ Options:
 
 		To activate this script run  [source initiate -h]
 
-		-h       -help     	for help
+		-h       -help         for help
 		-d       -deactivate   to deactivate
-		-a       -activate   	to activate
+		-a       -activate     to activate
 "
 }
 
