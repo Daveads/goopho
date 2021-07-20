@@ -41,7 +41,7 @@ class User(db.Model):
     #stores time user update profile
     updated_at = db.Column(db.DateTime(timezone=True), nullable=True)
     
-    email_verification = db.Column(db.DateTime, default=None, nullable=True)
+    email_verification = db.Column(db.String(20), default=None, nullable=True)
 
     isDeleted = db.Column(db.Boolean, default=False)
     
@@ -50,7 +50,7 @@ class User(db.Model):
     products = db.relationship('Product', backref='user')
 
 
-    def __init__(self, name, username, email, password, roles=setRole.user):
+    def __init__(self, name, username, email, password, email_verification=None, roles=setRole.user):
 
         self.public_id = str(uuid.uuid4())
         self.name = name
@@ -59,3 +59,4 @@ class User(db.Model):
         self.password =  generate_password_hash(password, method='sha256')
         self.roles = roles
         self.registered_on = datenow.strftime("%d/%m/%Y %H:%M:%S")
+        self.email_verification = email_verification

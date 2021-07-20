@@ -80,7 +80,7 @@ api.add_resource(login, "/login")
 
 #
 # MODEL INSTANT FOR EXTERNAL USER
-from goopho.models.users import User
+from goopho.models.users import User, setRole
 
 
 @app.after_request
