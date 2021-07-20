@@ -4,14 +4,7 @@ from datetime import datetime
 
 #models instant
 from goopho import User, setRole
-
 from goopho import db
-
-
-"""
-if __name__=="__main__":
-    app.run()
-"""
 
 
 @app.cli.command()
