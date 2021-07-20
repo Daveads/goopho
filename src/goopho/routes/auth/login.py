@@ -13,14 +13,14 @@ from flask_jwt_extended import create_access_token, set_access_cookies, get_csrf
 
 class login(Resource):
     
-    def get(self):
+    def post(self):
         
         auth = request.authorization
 
 
         if not auth or not auth.username or not auth.password:
             
-            return make_response("could not authenticat", 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
+            return make_response("could not authenticate", 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
        
         
         user = User.query.filter_by(username=auth.username).first()
