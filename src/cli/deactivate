@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+unset FLASK_APP
+
+unset FLASK_ENV
