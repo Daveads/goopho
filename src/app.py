@@ -1,6 +1,10 @@
 import click
 from goopho import app
-from goopho import User
+from datetime import datetime
+
+#models instant
+from goopho import User, setRole
+
 from goopho import db
 
 
@@ -25,23 +29,24 @@ def run():
 
 @app.cli.command()
 def root():
+ 
+    user = User.query.filter_by(username="goopho").first()
 
-    user = User.query.filter_by(username=['goopho']).first()
-    
-    print(user)
-
-    """
     if user:
 
         print("user already exist")
 
     else:
+        
+        datenow = datetime.now()
 
-        new_user = User(name="Goopho Root", username="goopho", email="the.goopho@gmail.com", password="123456", roles="Admin")
+        date = datenow.strftime("%d/%m/%Y %H:%M:%S")
+        
+        new_user = User(name="Goopho", username="goopho", email="the.goopho@gmail.com", password="123456", roles=setRole.admin, email_verification=date)
 
         db.session.add(new_user)
         db.session.commit()
 
         print("Root user created !!!!")
-
-    """
+        print("Email : the.goopho@gmail.com")
+        print("Password : 123456")
