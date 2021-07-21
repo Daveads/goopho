@@ -13,7 +13,7 @@ from flask_jwt_extended import create_access_token, set_access_cookies, get_csrf
 
 class login(Resource):
     
-    def get(self):
+    def post(self):
         
         auth = request.authorization
 
