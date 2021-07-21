@@ -20,7 +20,7 @@ class login(Resource):
 
         if not auth or not auth.username or not auth.password:
             
-            return make_response("could not authenticat", 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
+            return make_response("could not authenticate", 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
        
         
         user = User.query.filter_by(username=auth.username).first()
