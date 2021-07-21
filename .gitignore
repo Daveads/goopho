@@ -66,6 +66,8 @@ env
 *.Swp
 
 later.txt
+check_email.txt
+
 
 #still in development
 migrations
