@@ -71,3 +71,8 @@ check_email.txt
 
 #still in development
 migrations
+
+
+#node modules
+src/tests/routes/node_modules/
+src/tests/routes/package-lock.json
