@@ -51,25 +51,25 @@ from goopho.routes.auth.logout import logOut
 from goopho.routes.admin.Admin import Admin
 
 from goopho.routes.user.checkstuff import checkdata
-from goopho.routes.user.upload import upload
 from goopho.routes.user.getupload import getUpload
 
 # route blueprint register
 app.register_blueprint(Admin)
 app.register_blueprint(logOut)
 app.register_blueprint(checkdata)
-app.register_blueprint(upload)
 app.register_blueprint(getUpload)
 
 
 
 from goopho.routes.auth.signup import create_user
 from goopho.routes.auth.login import login
+from goopho.routes.user.upload import upload
 ###
 # route resources
 ###
 api.add_resource(create_user, "/signup")
 api.add_resource(login, "/login")
+api.add_resource(upload, "/upload")
 
 #######################################################
 # Todo 

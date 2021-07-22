@@ -1,18 +1,21 @@
-from flask import request, jsonify, Blueprint
+from flask import jsonify, request
+
+from flask_restful import Resource, abort
 
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import get_jwt_identity
 
 from werkzeug.utils import secure_filename
-import os
 
-from goopho.routes import app
 from goopho.routes import db
 from goopho.routes import Product
 from goopho.routes import Image
+from goopho.routes import User
 
-upload = Blueprint('upload', __name__)
+import os
 
+from goopho.routes import app
+import werkzeug
 
 
 def allowed_file(filename):
@@ -20,63 +23,64 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
 
-@upload.route('/upload', methods=['POST'])
-@jwt_required()
-def uploadFiles():
-   
-    if 'file' not in request.files:
+class upload(Resource):
+
+    @jwt_required()
+    def post(self):
         
-        return jsonify ({'message' : "no file part in the request"})
-
-    
-    files = request.files.getlist('file')
-    data = request.values.copy()
-    
-
-    picname = []
-
-    for file in files:
-
         
-
-        if file.filename == '':
-        
+        if 'file' not in request.files:
             
-            return jsonfiy ({'message' : "file does not exist"})
+            return jsonify ({'message' : "no file part in the request"})
 
+    
+        files = request.files.getlist('file')
+        data = request.values.copy()
+    
 
-        if file and allowed_file(file.filename):
+        picname = []
 
-            filename = secure_filename(file.filename)
-
-            picname.append(file.filename)
-
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+    
+        for file in files:
             
             
-        else:
+            if file.filename == '':
+                
+                return jsonify ({'message' : "file does not exist"})
 
-            return jsonify({'message' : 'file type not allowed'})
+
+            if file and allowed_file(file.filename):
+                
+                filename = secure_filename(file.filename)
+                
+                picname.append(file.filename)
+                
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            
+            
+            else:
+                
+                return jsonify({'message' : 'file type not allowed'})
 
 
 
+        user = User.query.filter_by(public_id=get_jwt_identity()).first()
+    
+        product = Product(title=data['title'], description=data['description'], user_pub_id=user.id)
+        db.session.add(product)
+        db.session.commit()
     
     
-    product = Product(title=data['title'], description=data['description'], user_pub_id=get_jwt_identity())
-    db.session.add(product)
-    db.session.commit()
     
+        product = Product.query.filter_by(title=data['title']).first()
+        product_id = product.id
     
-    
-    product = Product.query.filter_by(title=data['title']).first()
-    product_id = product.id
-    
-    for i in picname:
-        print(i)   
-        image = Image(image_name=i, product_id=product_id)
-        db.session.add(image)
+        for i in picname:
+          print(i)   
+          image = Image(image=i, product_id=product_id)
+          db.session.add(image)
 
-    db.session.commit()
+        db.session.commit()
     
      
-    return jsonify({'message' : 'File(s) successfully uploaded'})
+        return jsonify({'message' : 'File(s) successfully uploaded'})
