@@ -74,5 +74,5 @@ migrations
 
 
 #node modules
-src/tests/routes/node_modules/
-src/tests/routes/package-lock.json
+src/tests/routes/auth/node_modules/
+src/tests/routes/auth/package-lock.json
