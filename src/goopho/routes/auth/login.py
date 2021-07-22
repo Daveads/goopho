@@ -40,7 +40,9 @@ class login(Resource):
                             'token' : access_token,
                             'csrf_token' : csrf_token,
                             'email_verfication' : user.email_verification,
-                            'delete_status' : user.isDeleted
+                            'delete_status' : user.isDeleted,
+                            'email' : user.email,
+                            'username' : user.username
                             })
 	    
             set_access_cookies(response, access_token)
