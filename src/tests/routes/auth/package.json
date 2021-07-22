@@ -1,0 +1,14 @@
+{
+  "name": "goopho-tests",
+  "version": "0.0.1",
+  "description": "route tests",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "daveads",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
