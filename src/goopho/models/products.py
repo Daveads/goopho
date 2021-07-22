@@ -19,10 +19,9 @@ class Product(db.Model):
     images = db.relationship('Image', backref='product')
 
     
-    def __init__(self, title, description, user_pub_id, images):
+    def __init__(self, title, description, user_pub_id):
 
         self.title = title
         self.description = description
         self.user_pub_id = user_pub_id
-        self.images = images
         self.created_on = datetime.datetime.now()
