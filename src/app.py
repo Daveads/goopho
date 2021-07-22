@@ -7,6 +7,11 @@ from goopho import User, setRole
 from goopho import db
 
 
+if __name__ == "__main__":
+
+    app.run()
+
+
 @app.cli.command()
 def test():
     click.echo("i am test")
