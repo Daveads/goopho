@@ -59,7 +59,7 @@ class create_user(Resource):
 
         access_token = create_access_token(identity=user.public_id)
     
-        csrf_token = get_csrf_token(access_token)
+        #csrf_token = get_csrf_token(access_token)
     
     
         response = jsonify({
@@ -69,9 +69,7 @@ class create_user(Resource):
                             'name' :  user.name,
                             'username' : user.username,
                             'email_confirmation' : user.email_verification,
-                            'token' : access_token,
-                            'csrf_token' : csrf_token  
-
+                            'token' : access_token
         })
     
     

@@ -34,11 +34,10 @@ class login(Resource):
         if check_password_hash(user.password, auth.password):
             
             access_token = create_access_token(identity=user.public_id)
-            csrf_token = get_csrf_token(access_token)
+            #csrf_token = get_csrf_token(access_token)
         
             response = jsonify({
                             'token' : access_token,
-                            'csrf_token' : csrf_token,
                             'email_verfication' : user.email_verification,
                             'delete_status' : user.isDeleted,
                             'email' : user.email,
