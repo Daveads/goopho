@@ -35,7 +35,7 @@ class login(Resource):
 
             print(identity)
             
-            access_token = create_access_token(identity=identity, fresh=True)
+            access_token = create_access_token(identity=identity)
             #csrf_token = get_csrf_token(access_token)
             refresh_token = create_refresh_token(identity)
 
@@ -47,7 +47,7 @@ class login(Resource):
                             'delete_status' : user.isDeleted,
                             'email' : user.email,
                             'username' : user.username
-                            })
+                            }), 200
 	    
             set_access_cookies(response, access_token)
 	
