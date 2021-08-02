@@ -1,9 +1,5 @@
-from re import I
 from flask import jsonify
 from flask_restful import Resource, reqparse, abort
-from flasgger import swag_from
-
-import uuid
 
 from goopho.routes import User
 from goopho.routes import db
@@ -21,7 +17,7 @@ signup_args.add_argument("email", type=str, help="email fields is required", req
 
 class create_user(Resource):
 
-    @swag_from('/goopho/docs/signup_specs.yml', methods=['POST'])
+    
     def post(self):
 
         data = signup_args.parse_args()
@@ -59,6 +55,8 @@ class create_user(Resource):
 
         access_token = create_access_token(identity=user.public_id)
     
+        refresh_token = create_refresh_token(identity=identity)
+
         #csrf_token = get_csrf_token(access_token)
     
     
@@ -69,7 +67,8 @@ class create_user(Resource):
                             'name' :  user.name,
                             'username' : user.username,
                             'email_confirmation' : user.email_verification,
-                            'token' : access_token
+                            'access_token' : access_token,
+                            'refresh_token' : refresh_token
         })
     
     
