@@ -11,11 +11,10 @@ from goopho.routes import db
 from goopho.routes import Product
 from goopho.routes import Image
 from goopho.routes import User
+from goopho.routes import app
 
 import os
-
-from goopho.routes import app
-import werkzeug
+import uuid
 
 
 def allowed_file(filename):
@@ -65,18 +64,23 @@ class upload(Resource):
 
 
         user = User.query.filter_by(public_id=get_jwt_identity()).first()
+
+        if user :
+            
+            #assign a product_id 
+            product_pub_id = str(uuid.uuid4())
+            product = Product(title=data['title'], description=data['description'], user_pub_id=user.id, product_pub_id=product_pub_id)
+            db.session.add(product)
+            db.session.commit()
+
+        else:
+
+            abort(409, message=" an error occured in the database")
     
-        product = Product(title=data['title'], description=data['description'], user_pub_id=user.id)
-        db.session.add(product)
-        db.session.commit()
-    
-    
-    
-        product = Product.query.filter_by(title=data['title']).first()
+        product = Product.query.filter_by(product_pub_id=product_pub_id).first()
         product_id = product.id
     
         for i in picname:
-          print(i)   
           image = Image(image=i, product_id=product_id)
           db.session.add(image)
 
