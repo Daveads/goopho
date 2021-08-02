@@ -1,7 +1,4 @@
-from os import name
-from re import I
 from goopho.models import db
-from sqlalchemy.sql import func
 import enum 
 from datetime import datetime 
 
