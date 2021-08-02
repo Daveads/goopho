@@ -1,13 +1,12 @@
 from flask import request, jsonify, make_response
 
 from flask_restful import Resource, abort
-from flasgger import swag_from
 
 from goopho.routes import User
 from werkzeug.security import check_password_hash
 
 #add flask_jwt
-from flask_jwt_extended import (create_access_token, set_access_cookies, get_csrf_token, create_refresh_token)
+from flask_jwt_extended import (create_access_token, set_access_cookies, create_refresh_token)
 
 class login(Resource):
     
@@ -37,7 +36,7 @@ class login(Resource):
             
             access_token = create_access_token(identity=identity)
             #csrf_token = get_csrf_token(access_token)
-            refresh_token = create_refresh_token(identity)
+            refresh_token = create_refresh_token(identity=identity)
 
         
             response = jsonify({
