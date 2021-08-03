@@ -6,7 +6,7 @@ from goopho.routes import User
 from werkzeug.security import check_password_hash
 
 #add flask_jwt
-from flask_jwt_extended import (create_access_token, set_access_cookies, create_refresh_token)
+from flask_jwt_extended import (create_access_token, create_refresh_token)
 
 class login(Resource):
     
@@ -35,22 +35,17 @@ class login(Resource):
             print(identity)
             
             access_token = create_access_token(identity=identity)
-            #csrf_token = get_csrf_token(access_token)
+            
             refresh_token = create_refresh_token(identity=identity)
 
         
-            response = jsonify({
+            return jsonify({
                             'access_token' : access_token,
                             'refresh_token' : refresh_token,
                             'email_verfication' : user.email_verification,
                             'delete_status' : user.isDeleted,
                             'email' : user.email,
                             'username' : user.username
-                            }), 200
+                            })
 	    
-            set_access_cookies(response, access_token)
-	
-            return response
-
- 
         return  make_response("could not authenticate", 401, {'WWW-Authenticate': 'Basic realm="Login required!"'})
