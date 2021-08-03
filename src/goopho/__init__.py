@@ -1,6 +1,5 @@
 from flask import Flask, jsonify
 from flask_restful import Api
-from flasgger import Swagger, swag_from
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -9,13 +8,7 @@ from flask_cors import CORS
 
 
 from flask_jwt_extended import JWTManager
-from flask_jwt_extended import create_access_token
-from flask_jwt_extended import get_jwt
-from flask_jwt_extended import get_jwt_identity
-from flask_jwt_extended import jwt_required
-from flask_jwt_extended import JWTManager
-from flask_jwt_extended import set_access_cookies
-from flask_jwt_extended import unset_jwt_cookies
+    
 
 
 from datetime import datetime
@@ -34,16 +27,8 @@ migrate = Migrate(app, db)
 
 api = Api(app)
 
-
-app.config['SWAGGER'] = {
-    'title': 'Goopho route api doc',
-    'uiversion': 2
-}
-
-swag = Swagger(app)
-
 ##
-## ROUTES 
+## ROUTES  //remove
 ##
 
 from goopho.routes.auth.logout import logOut
@@ -53,7 +38,7 @@ from goopho.routes.admin.Admin import Admin
 from goopho.routes.user.checkstuff import checkdata
 from goopho.routes.user.getupload import getUpload
 
-# route blueprint register
+# route blueprint register //remove this
 app.register_blueprint(Admin)
 app.register_blueprint(logOut)
 app.register_blueprint(checkdata)
@@ -64,25 +49,74 @@ app.register_blueprint(getUpload)
 from goopho.routes.auth.signup import create_user
 from goopho.routes.auth.login import login
 from goopho.routes.user.upload import upload
+from goopho.routes.user.profile import profile
+from goopho.routes.auth.refresh_token import RefreshToken
+
+
 ###
 # route resources
 ###
 api.add_resource(create_user, "/signup")
 api.add_resource(login, "/login")
 api.add_resource(upload, "/upload")
-
-#######################################################
-# Todo 
-# work on super root user.... 
-# auto add a super user if it does'nt exist
-#######################################################
+api.add_resource(profile, "/profile")
+api.add_resource(RefreshToken, "/refreshtoken")
 
 
 #
 # MODEL INSTANT FOR EXTERNAL USER
 from goopho.models.users import User, setRole
+from goopho.models.products import Product
+from goopho.models.images import Image
 
 
+##
+## create root on startup 
+##
+
+user = None
+def create_root():
+    
+    try:
+        global user        
+        user = User.query.filter_by(username="goopho").first()
+
+    except:
+        print("                    * Database error table does not exist yet")
+
+
+    if not user:
+        
+        try:
+            
+            datenow = datetime.now()
+            
+            date = datenow.strftime("%d/%m/%Y %H:%M:%S")
+        
+            new_user = User(name="Goopho", username="goopho", email="the.goopho@gmail.com", password="123456", roles=setRole.admin, email_verification=date)
+
+            db.session.add(new_user)
+
+            db.session.commit()
+
+        
+            print(" * Root user created !!!!")
+            print(" * Email : the.goopho@gmail.com")
+            print(" * Password : 123456")
+
+        except:
+            print("                    * Database error ('can not create root user' !!!!) ")
+
+            return False
+
+        return True
+
+    else:
+        return False
+
+create_root()
+
+"""
 @app.after_request
 def refresh_expiring_jwts(response):
     try:
@@ -98,6 +132,7 @@ def refresh_expiring_jwts(response):
     except (RuntimeError, KeyError):
         # Case where there is not a valid JWT. Just return the original respone
         return response
+"""
 
 
 @app.errorhandler(404)
