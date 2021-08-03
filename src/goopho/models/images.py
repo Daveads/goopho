@@ -6,12 +6,12 @@ class Image(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     
-    image = db.Column(db.String(100))
+    name = db.Column(db.String(100))
     
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'))
 
-    def __init__(self, image, product_id):
+    def __init__(self, name, product_id):
 
-        self.image = image
+        self.name = name
         
         self.product_id = product_id

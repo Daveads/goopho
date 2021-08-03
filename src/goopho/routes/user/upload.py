@@ -81,7 +81,7 @@ class upload(Resource):
         product_id = product.id
     
         for i in picname:
-          image = Image(image=i, product_id=product_id)
+          image = Image(name=i, product_id=product_id)
           db.session.add(image)
 
         db.session.commit()
