@@ -5,46 +5,65 @@ from datetime import datetime
 #models instant
 from goopho import User, setRole
 from goopho import db
-
+from goopho import create_root
 
 if __name__ == "__main__":
+
+    root = create_root()
+    if root:
+        
+        print(" * root created see doc for details")
 
     app.run()
 
 
+
 @app.cli.command()
 def test():
-    click.echo("i am test")
+    click.echo(" * i am test")
 
 
 @app.cli.command()
 def run():
 
     if __name__ == "__main__":
+        root = create_root()
+
+        if root:
+
+            print(" * root created see doc for details")
 
         app.run()
+        
 
 
 @app.cli.command()
 def root():
- 
-    user = User.query.filter_by(username="goopho").first()
+    "creates a root user"
+    root = create_root()
 
-    if user:
-
-        print("user already exist")
-
-    else:
+    if root:
         
-        datenow = datetime.now()
+        print(" * root created see doc for details")
 
-        date = datenow.strftime("%d/%m/%Y %H:%M:%S")
-        
-        new_user = User(name="Goopho", username="goopho", email="the.goopho@gmail.com", password="123456", roles=setRole.admin, email_verification=date)
 
-        db.session.add(new_user)
-        db.session.commit()
+@app.cli.command()
+def dbinit():
+    "This initiate the database tables"
+    from goopho import db
+    db.create_all()
+    print("* Database initiated")
 
-        print("Root user created !!!!")
-        print("Email : the.goopho@gmail.com")
-        print("Password : 123456")
+
+#help()
+
+@app.cli.command()
+def goopho():
+    'help from goohpo'
+
+    print("#migration")
+
+    print("**for first migration**")
+    print("flask db init")
+    print("flask db migrate -m 'Initial migration.' ")
+    print("flask db upgrade")
