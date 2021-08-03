@@ -6,7 +6,7 @@ from goopho.routes import db
 
 
 #add flask_jwt
-from flask_jwt_extended import create_access_token, set_access_cookies, get_csrf_token
+from flask_jwt_extended import create_access_token, create_refresh_token
 
 signup_args = reqparse.RequestParser()
 signup_args.add_argument("name", type=str, help="Name fields is required", required=True)
@@ -55,10 +55,8 @@ class create_user(Resource):
 
         access_token = create_access_token(identity=user.public_id)
     
-        refresh_token = create_refresh_token(identity=identity)
+        refresh_token = create_refresh_token(identity=user.public_id)
 
-        #csrf_token = get_csrf_token(access_token)
-    
     
         response = jsonify({
 
@@ -71,7 +69,5 @@ class create_user(Resource):
                             'refresh_token' : refresh_token
         })
     
-    
-        set_access_cookies(response, access_token)
 
         return response
