@@ -18,7 +18,7 @@ from datetime import timedelta
 
 # APP INSTANTS
 app = Flask(__name__)
-app.config.from_object("config.Test_db_with_sqlite")
+app.config.from_object("config.DevelopmentConfig")
 
 db = SQLAlchemy(app)
 cors = CORS(app, resorces={r'/*': {"origins": '*'}})
